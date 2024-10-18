@@ -98,6 +98,20 @@ Among the various AWS disaster recovery options, the Warm Standby approach emerg
    - Implements alarms to trigger EC2 auto-scaling.
    - Incorporates X-Ray to track cross-services communication.
    - Utilizes AWS Config to ensure security vulnerabilities are promptly addressed.
+  
+## Enhanced Disaster Recovery Architecture with Integrated Features 
+
+**1. Check Stack Status Before Creating**:
+The system now checks if each CloudFormation stack (VPC, RDS, Auto Scaling, Route53) already exists before creation. This ensures that you don’t accidentally attempt to recreate existing stacks, preventing potential errors or conflicts.
+
+**2. Logging Stack Events**:
+During stack creation or deletion, the architecture logs CloudFormation events in real-time. This provides detailed insights into each step of the process, ensuring greater transparency and allowing teams to monitor the status of resources being created or terminated.
+
+**3. Handle Rollback Detection**:
+The system detects if a rollback occurred during stack creation, automatically capturing detailed logs and reasons for the rollback. This allows for easier troubleshooting of deployment issues and ensures that any failures are immediately recognized and handled.
+
+**4. Parameterize Template Paths and Key Values**:
+The CloudFormation templates (VPC, RDS, Auto Scaling, Route53) and their parameters (such as VPC CIDR blocks, RDS credentials, and EC2 instance sizes) are now fully parameterized. This makes the architecture more flexible, allowing administrators to customize the deployment by simply adjusting these parameters without modifying the underlying code.
 
 ## Infrastructure as Code
  The AWS CloudFormation templates provide a structured and automated approach to set up the necessary components. Let's explore the individual infrastructure files:
